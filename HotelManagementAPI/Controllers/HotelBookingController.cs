@@ -38,5 +38,18 @@ namespace HotelManagementAPI.Controllers
 
             return new JsonResult(Ok(booking));
         }
+
+        [HttpGet]
+        public JsonResult Get(int id)
+        {
+            var result = _context.Bookings.Find(id);
+
+            if (result == null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            return new JsonResult(Ok(result));
+        }
     }
 }
