@@ -30,8 +30,6 @@ namespace HotelManagementAPI.Controllers
                 {
                     return new JsonResult(NotFound());
                 }
-
-                bookingInDb = booking;
             }
 
             _context.SaveChanges();
