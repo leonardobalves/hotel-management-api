@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using HotelManagementAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagementAPI.Controllers
 {
@@ -30,6 +31,11 @@ namespace HotelManagementAPI.Controllers
                 {
                     return new JsonResult(NotFound());
                 }
+
+                bookingInDb.RoomNumber = booking.RoomNumber;
+                bookingInDb.ClientName = booking.ClientName;
+
+                _context.Entry(bookingInDb).State = EntityState.Modified;
             }
 
             _context.SaveChanges();
