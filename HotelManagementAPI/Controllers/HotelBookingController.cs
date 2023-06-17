@@ -34,6 +34,7 @@ namespace HotelManagementAPI.Controllers
 
                 bookingInDb.RoomNumber = booking.RoomNumber;
                 bookingInDb.ClientName = booking.ClientName;
+                bookingInDb.Vacant = booking.Vacant;
 
                 _context.Entry(bookingInDb).State = EntityState.Modified;
             }
