@@ -11,6 +11,7 @@ namespace HotelManagementAPI.Models
         [Required]
         public int RoomNumber { get; set; }
         [Required]
+        [MaxLength(30)]
         public string? ClientName { get; set; }
         [Required]
         public bool Vacant { get; set; }
