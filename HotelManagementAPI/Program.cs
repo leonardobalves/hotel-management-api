@@ -1,5 +1,6 @@
 using HotelManagementAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,13 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<ApiContext>(options =>
-    options.UseInMemoryDatabase("BookingDb")
-);
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<ApiContext>(options =>
+    options.UseMySql(mySqlConnection,
+        ServerVersion.AutoDetect(mySqlConnection)));
 
 var app = builder.Build();
 
