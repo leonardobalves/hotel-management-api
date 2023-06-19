@@ -2,6 +2,7 @@
 using HotelManagementAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelManagementAPI.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    partial class ApiContextModelSnapshot : ModelSnapshot
+    [Migration("20230619223651_ClientsAndRooms")]
+    partial class ClientsAndRooms
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,12 +36,7 @@ namespace HotelManagementAPI.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("varchar(15)");
 
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
                     b.HasKey("ClientId");
-
-                    b.HasIndex("RoomId");
 
                     b.ToTable("Clients");
                 });
@@ -50,6 +47,9 @@ namespace HotelManagementAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<int>("RoomNumber")
                         .HasColumnType("int");
 
@@ -58,23 +58,25 @@ namespace HotelManagementAPI.Migrations
 
                     b.HasKey("RoomId");
 
+                    b.HasIndex("ClientId");
+
                     b.ToTable("Rooms");
-                });
-
-            modelBuilder.Entity("HotelManagementAPI.Models.Client", b =>
-                {
-                    b.HasOne("HotelManagementAPI.Models.Room", "Room")
-                        .WithMany("Clients")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("HotelManagementAPI.Models.Room", b =>
                 {
+                    b.HasOne("HotelManagementAPI.Models.Client", "Clients")
+                        .WithMany("Rooms")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Clients");
+                });
+
+            modelBuilder.Entity("HotelManagementAPI.Models.Client", b =>
+                {
+                    b.Navigation("Rooms");
                 });
 #pragma warning restore 612, 618
         }

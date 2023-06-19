@@ -8,6 +8,7 @@ namespace HotelManagementAPI.Models
         {        
         }
 
-        public DbSet<HotelBooking>? Bookings { get; set; }
+        public DbSet<Room>? Rooms { get; set; }
+        public DbSet<Client>? Clients { get; set; }
     }
 }
