@@ -29,7 +29,7 @@ namespace HotelManagementAPI.Controllers
         }
 
         //GET ID
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = "GetClient")]
         public ActionResult<Client> Get(int id)
         {
             var clients = _context.Clients.FirstOrDefault(p => p.ClientId == id);
@@ -42,6 +42,19 @@ namespace HotelManagementAPI.Controllers
         }
 
         //POST
+        [HttpPost]
+        public ActionResult<Client> Post(Client client)
+        {
+            if (client == null)
+                return BadRequest();
+
+            _context.Clients.Add(client);
+            _context.SaveChanges();
+
+            return new CreatedAtRouteResult("GetClient", new { id = client.ClientId }, client);
+        }
+
+
         //PUT
         //DELETE
     }

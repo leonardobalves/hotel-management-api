@@ -18,6 +18,6 @@ public class Client
     [StringLength(15)]
     public string? PhoneNumber { get; set; }
 
-    public int RoomId { get; set; }
+    public int? RoomId { get; set; }
     public Room? Room { get; set; }
 }
