@@ -1,6 +1,7 @@
 ﻿using HotelManagementAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagementAPI.Controllers
 {
@@ -49,5 +50,18 @@ namespace HotelManagementAPI.Controllers
             return new CreatedAtRouteResult("GetRoom", new { id = room.RoomId }, room);
         }
 
+        [HttpPut("{id:int}")]
+        public ActionResult Put(int id, Room room)
+        {
+            if (id != room.RoomId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(room).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return Ok(room);
+        }
     }
 }
