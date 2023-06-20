@@ -7,11 +7,11 @@ namespace HotelManagementAPI.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class Bookings : ControllerBase
+    public class BookingsController : ControllerBase
     {
         private readonly ApiContext _context;
 
-        public Bookings(ApiContext context)
+        public BookingsController(ApiContext context)
         {
             _context = context;
         }
