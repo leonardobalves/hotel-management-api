@@ -72,5 +72,18 @@ namespace HotelManagementAPI.Controllers
         }
 
         //DELETE
+        [HttpDelete("{id:int}")]
+        public ActionResult Delete(int id)
+        {
+            var client = _context.Clients.FirstOrDefault(p => p.ClientId == id);
+            if (client is null)
+            {
+                return NotFound();
+            }
+            _context.Clients.Remove(client);
+            _context.SaveChanges();
+
+            return Ok(client);
+        }
     }
 }
