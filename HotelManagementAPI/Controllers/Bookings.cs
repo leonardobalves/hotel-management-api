@@ -26,7 +26,7 @@ namespace HotelManagementAPI.Controllers
             return rooms;
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name= "GetRoom")]
         public ActionResult<Room> Get(int id)
         {
             var rooms = _context.Rooms.FirstOrDefault(opt => opt.RoomId == id);
@@ -35,6 +35,18 @@ namespace HotelManagementAPI.Controllers
                 return NotFound("Room not found...");
             }
             return rooms;
+        }
+
+        [HttpPost]
+        public ActionResult Post(Room room)
+        {
+            if (room is null)
+                return BadRequest();
+
+            _context.Rooms.Add(room);
+            _context.SaveChanges();
+
+            return new CreatedAtRouteResult("GetRoom", new { id = room.RoomId }, room);
         }
 
     }
