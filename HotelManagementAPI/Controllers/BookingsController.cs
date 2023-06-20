@@ -19,7 +19,7 @@ namespace HotelManagementAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Room>> Get()
         {
-            var rooms = _context.Rooms.ToList();
+            var rooms = _context.Rooms.AsNoTracking().ToList();
             if (rooms is null)
             {
                 return NotFound("Rooms not found...");
@@ -30,7 +30,7 @@ namespace HotelManagementAPI.Controllers
         [HttpGet("{id:int}", Name= "GetRoom")]
         public ActionResult<Room> Get(int id)
         {
-            var rooms = _context.Rooms.FirstOrDefault(opt => opt.RoomId == id);
+            var rooms = _context.Rooms.AsNoTracking().FirstOrDefault(opt => opt.RoomId == id);
             if (rooms is null)
             {
                 return NotFound("Room not found...");
@@ -41,7 +41,7 @@ namespace HotelManagementAPI.Controllers
         [HttpGet("clients")]
         public ActionResult<IEnumerable<Room>> GetRoomClients()
         {
-            return _context.Rooms.Include(p => p.Clients).ToList();
+            return _context.Rooms.Include(p => p.Clients).AsNoTracking().ToList();
         }
 
         [HttpPost]

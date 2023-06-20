@@ -20,7 +20,7 @@ namespace HotelManagementAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Client>> Get()
         {
-            var clients = _context.Clients.ToList();
+            var clients = _context.Clients.AsNoTracking().ToList();
             if (clients is null)
             {
                 return NotFound("Clients not found...");
@@ -33,7 +33,7 @@ namespace HotelManagementAPI.Controllers
         [HttpGet("{id:int}", Name = "GetClient")]
         public ActionResult<Client> Get(int id)
         {
-            var clients = _context.Clients.FirstOrDefault(p => p.ClientId == id);
+            var clients = _context.Clients.AsNoTracking().FirstOrDefault(p => p.ClientId == id);
             if (clients is null)
             {
                 return NotFound("Client not found...");

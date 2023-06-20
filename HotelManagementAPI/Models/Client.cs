@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace HotelManagementAPI.Models;
 
@@ -19,5 +19,8 @@ public class Client
     public string? PhoneNumber { get; set; }
 
     public int? RoomId { get; set; }
+
+    [JsonIgnore]
     public Room? Room { get; set; }
+    
 }
