@@ -63,5 +63,21 @@ namespace HotelManagementAPI.Controllers
 
             return Ok(room);
         }
+
+        [HttpDelete("{id:int}")]
+        public ActionResult Delete(int id)
+        {
+            var room = _context.Rooms.FirstOrDefault(p => p.RoomId == id);
+
+            if (room is null)
+            {
+                return NotFound("Room not found...");
+            }
+
+            _context.Rooms.Remove(room);
+            _context.SaveChanges();
+
+            return Ok(room);
+        }
     }
 }
