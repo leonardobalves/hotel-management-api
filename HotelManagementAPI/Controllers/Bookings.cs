@@ -14,5 +14,16 @@ namespace HotelManagementAPI.Controllers
         {
             _context = context;
         }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Room>> Get()
+        {
+            var rooms = _context.Rooms.ToList();
+            if (rooms is null)
+            {
+                return NotFound("Rooms not found...");
+            }
+            return rooms;
+        }
     }
 }
