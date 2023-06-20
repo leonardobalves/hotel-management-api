@@ -25,5 +25,17 @@ namespace HotelManagementAPI.Controllers
             }
             return rooms;
         }
+
+        [HttpGet("{id:int}")]
+        public ActionResult<Room> Get(int id)
+        {
+            var rooms = _context.Rooms.FirstOrDefault(opt => opt.RoomId == id);
+            if (rooms is null)
+            {
+                return NotFound("Room not found...");
+            }
+            return rooms;
+        }
+
     }
 }
