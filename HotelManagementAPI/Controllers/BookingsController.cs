@@ -38,6 +38,12 @@ namespace HotelManagementAPI.Controllers
             return rooms;
         }
 
+        [HttpGet("clients")]
+        public ActionResult<IEnumerable<Room>> GetRoomClients()
+        {
+            return _context.Rooms.Include(p => p.Clients).ToList();
+        }
+
         [HttpPost]
         public ActionResult Post(Room room)
         {
