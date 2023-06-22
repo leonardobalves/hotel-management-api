@@ -29,7 +29,7 @@ Add booking
 - **@POST** 'https://localhost:7173/bookings' raw JSON: { "roomNumber": "100", "vacant": true, "clients": [] }
 
 Modify booking
-- **@PUT** 'https://localhost:7173/bookings/{id}' raw JSON: { "roomNumber": "150", "vacant": false, "clients": [] }
+- **@PUT** 'https://localhost:7173/bookings/{id}' raw JSON: { "roomId": 5, "roomNumber": 500, "vacant": true, "clients": [] }
 
 Delete booking
 - **@DELETE** 'https://localhost:7173/bookings/{id}'
@@ -44,7 +44,7 @@ Add clients
 - **@POST** 'https://localhost:7173/clients' raw JSON: { "name": "Leonardo", "phoneNumber": "11111111" }
 
 Modify client
-- **@PUT** 'https://localhost:7173/clients/{id}' raw JSON: { "name": "Leonardo Buck Alves", "phoneNumber": "22222222" }
+- **@PUT** 'https://localhost:7173/clients/{id}' raw JSON: { "clientId": 3, "name": "Leonardo", "phoneNumber": "33333333", "roomId": 3 }
 
 Delete booking
 - **@DELETE** 'https://localhost:7173/clients/{id}'
